@@ -17,6 +17,7 @@ public class pla : MonoBehaviour
     Rigidbody rigidbody;
 
     Animator animator;
+    
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -35,6 +36,7 @@ public class pla : MonoBehaviour
 
         AnimationUpdate();
 
+        Act();
         MoveCtrl();
         RotCtrl();
         
@@ -104,6 +106,18 @@ public class pla : MonoBehaviour
             animator.SetBool("isRunning", true);
         }
 
+    }
+
+    void Act()
+    {
+        if (Input.GetMouseButtonDown(0))
+        { 
+            animator.SetBool("acttack", true);
+        }
+        else
+        {
+            animator.SetBool("acttack", false);
+        }
     }
 
 

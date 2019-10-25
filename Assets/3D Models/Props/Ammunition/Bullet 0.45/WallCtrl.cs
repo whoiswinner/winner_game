@@ -3,8 +3,25 @@ using System.Collections;
 
 public class WallCtrl : MonoBehaviour
 {
-    void OnCallisionEnter(Collision col)
+    
+
+    void OnCollisionEnter(Collision collision)
     {
-        if (col.collider.tag == "Bullet") Destroy(col.gameObject);
+        if (gameObject != null)
+            if (collision.gameObject.tag == "Bullet")
+        {
+                Debug.Log(gameObject.transform.position);
+                Destroy( collision.gameObject);
+            
+        }
+       /* if (gameObject != null)
+            if (collision.gameObject.tag == "BigBullet")
+            {
+                Debug.Log(gameObject.transform.position);
+                Destroy(collision.gameObject);
+
+            }
+            */
+
     }
 }

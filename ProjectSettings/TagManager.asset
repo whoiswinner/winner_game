@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bullet
+  - ground
+  - BigBullet
   layers:
   - Default
   - TransparentFX
