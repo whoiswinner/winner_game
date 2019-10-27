@@ -27,7 +27,7 @@ public class FireCtrl : MonoBehaviour
     void Fire()
     {
         CreateBullet();
-
+        SoundManager.instance.PlaySE("GunSound");
     }
 
     void CreateBullet()

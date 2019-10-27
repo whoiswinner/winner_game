@@ -78,8 +78,10 @@ public class pla : MonoBehaviour
 
     void Jump()
     {
+        
         if (Input.GetButtonDown("Jump"))
         {
+            SoundManager.instance.PlaySE("Jump1");
             if (isJumping)
             {
                 Debug.Log("점프가능");

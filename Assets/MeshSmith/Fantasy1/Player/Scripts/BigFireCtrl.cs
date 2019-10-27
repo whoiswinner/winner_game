@@ -32,6 +32,7 @@ public class BigFireCtrl : MonoBehaviour
     void BigFire()
     {
         CreateBigBullet();
+        SoundManager.instance.PlaySE("GunSound11");
 
     }
 

@@ -34,6 +34,7 @@ public class ParticleshieldCtrl : MonoBehaviour
     void shieldCtrl()
     {
         Createshield();
+        SoundManager.instance.PlaySE("Shield");
 
     }
 

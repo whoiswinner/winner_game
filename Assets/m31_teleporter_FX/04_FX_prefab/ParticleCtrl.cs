@@ -16,6 +16,11 @@ public class ParticleCtrl : MonoBehaviour
     {
 
     }
+
+    void Update()
+    {
+        
+    }
     void FixedUpdate()
     {
         ParticleShot();
@@ -27,4 +32,5 @@ public class ParticleCtrl : MonoBehaviour
     {
         rigidbody.AddForce(transform.up * Speed);
     }
+
 }
