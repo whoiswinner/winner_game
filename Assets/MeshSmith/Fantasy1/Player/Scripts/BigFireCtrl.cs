@@ -6,19 +6,22 @@ public class BigFireCtrl : MonoBehaviour
     public GameObject Bigbullet;
     public Transform firePos;
 
-
-
+    private PlayerUi PlayerUi;
+    private GameObject player;
 
     void Awake()
     {
-
+        player = GameObject.FindGameObjectWithTag("Player");
+        PlayerUi = player.GetComponent<PlayerUi>();
     }
     void Update()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (PlayerUi.skillSlider.value == 100 && Input.GetKey(KeyCode.Q))
         {
             Key_Q();
             BigFire();
+            PlayerUi.currentSkill = 0;
+            PlayerUi.skillSlider.value = 0;
         }
 
 

@@ -6,8 +6,9 @@ public class FireCtrl : MonoBehaviour
     public GameObject bullet;
     public Transform firePos;
 
+    private float fireDeley =0.98f;
+    private float fireTime;
 
-    
 
     void Awake()
     {
@@ -15,12 +16,21 @@ public class FireCtrl : MonoBehaviour
     }
     void Update()
     {
+        fireTime += Time.deltaTime;
+
         if (Input.GetMouseButtonDown(0))
         {
-            Fire();
-            
+
+            if (fireTime >= fireDeley)
+            {
+                Fire();
+                fireTime = 0;
+            }
+
+
+
         }
-      
+
 
     }
 

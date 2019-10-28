@@ -8,6 +8,8 @@ public class pla : MonoBehaviour
     public float rotSpeed = 3.0f;
     public float jumpPower = 3.0f;
     public Camera fpsCam;
+    public float cameraLimit;
+    public float cameraRotaionX = 0;
 
     float h;
     float v;
@@ -73,11 +75,16 @@ public class pla : MonoBehaviour
 
     void RotCtrl()
     {
-        float rotX = Input.GetAxis("Mouse Y") * rotSpeed;
-        float rotY = Input.GetAxis("Mouse X") * rotSpeed;
+        float _yRotation = Input.GetAxisRaw("Mouse X");
+        Vector3 _characterRotationY = new Vector3(0f, _yRotation, 0f) * rotSpeed;
+        rigidbody.MoveRotation(rigidbody.rotation * Quaternion.Euler(_characterRotationY));
 
-        this.transform.localRotation *= Quaternion.Euler(0, rotY, 0);
-        fpsCam.transform.localRotation *= Quaternion.Euler(-rotX, 0, 0);
+        float _xRotation = Input.GetAxisRaw("Mouse Y");
+        float _cameraRotationX = _xRotation * rotSpeed;
+        cameraRotaionX -= _cameraRotationX;
+        cameraRotaionX = Mathf.Clamp(cameraRotaionX, -cameraLimit, cameraLimit);
+
+        fpsCam.transform.localEulerAngles = new Vector3(cameraRotaionX, 0f, 0f);
     }
 
     void Jump()
@@ -98,6 +105,11 @@ public class pla : MonoBehaviour
                 Debug.Log("점프불가능");
                 return;
             }
+            animator.SetBool("Jumping", true);
+        }
+        else
+        {
+            animator.SetBool("Jumping", false);
         }
 
     }

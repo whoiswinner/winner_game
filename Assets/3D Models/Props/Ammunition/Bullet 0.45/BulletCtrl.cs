@@ -7,10 +7,14 @@ public class BulletCtrl : MonoBehaviour
     public float Speed = 1000.0f;
     public Rigidbody rigidbody;
 
+    private PlayerUi PlayerUi;
+    private GameObject player;
 
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        PlayerUi = player.GetComponent<PlayerUi>();
     }
     void Start()
     {
@@ -21,7 +25,21 @@ public class BulletCtrl : MonoBehaviour
         bulletShot();
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (gameObject != null)
+            if (collision.gameObject.tag == "Player")
+            {
+                if (PlayerUi.currentHealth > 0)
+                {
+                    PlayerUi.TakeDamage(Damage);
 
+                }
+
+
+
+            }
+    }
 
     void bulletShot()
     {

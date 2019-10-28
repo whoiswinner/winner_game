@@ -8,20 +8,24 @@ public class ParticleshieldCtrl : MonoBehaviour
 
     public ParticleSystem particles;
 
+    private PlayerUi PlayerUi;
+    private GameObject player;
 
 
     void Awake()
     {
-
+        player = GameObject.FindGameObjectWithTag("Player");
+        PlayerUi = player.GetComponent<PlayerUi>();
     }
     void Update()
     {
-        if (Input.GetKey(KeyCode.E))
+        if (PlayerUi.shieldSlider.value == 100 && Input.GetKey(KeyCode.E))
         {
             Key_E();
             shieldCtrl();
+            PlayerUi.currentShield = 0;
+            PlayerUi.shieldSlider.value = 0;
         }
-
 
     }
     private void Key_E()
