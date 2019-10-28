@@ -7,7 +7,7 @@ public class Join : MonoBehaviour
     // Start is called before the first frame update
     public void GameJoin()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("DemoScene");
     }
     void Start()
     {

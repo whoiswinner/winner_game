@@ -50,21 +50,25 @@ public class pla : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
+         
             this.transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.S))
         {
             this.transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
+        
         }
         if (Input.GetKey(KeyCode.A))
         {
             this.transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+        
         }
         if (Input.GetKey(KeyCode.D))
         {
             this.transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        
         }
-       
+
     }
 
     void RotCtrl()
@@ -81,12 +85,13 @@ public class pla : MonoBehaviour
         
         if (Input.GetButtonDown("Jump"))
         {
-            SoundManager.instance.PlaySE("Jump1");
+            
             if (isJumping)
             {
                 Debug.Log("점프가능");
                 isJumping = false;
                 rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+                SoundManager.instance.PlaySE("Jump1");
             }
             else
             {
@@ -102,10 +107,12 @@ public class pla : MonoBehaviour
         if (h == 0 && v == 0)
         {
             animator.SetBool("isRunning", false);
+        
         }
         else
         {
             animator.SetBool("isRunning", true);
+        
         }
 
     }
