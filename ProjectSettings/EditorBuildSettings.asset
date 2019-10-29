@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Sun_Temple/Scenes/DemoScene.unity
     guid: d8f213b28287d8b4dab42cf4a34f94e5
+  - enabled: 1
+    path: Assets/Sun_Temple/Scenes/Soundsc.unity
+    guid: 3c99d7d3a47c5244e82a911129aab985
   m_configObjects: {}
