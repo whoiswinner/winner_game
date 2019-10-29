@@ -203,8 +203,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 416996}
+  - component: {fileID: 6602070630705928829}
   - component: {fileID: 20551622}
-  - component: {fileID: 5236631591847192025}
   - component: {fileID: 7450936738628161942}
   m_Layer: 0
   m_Name: Bullet (HQ)
@@ -229,6 +229,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &6602070630705928829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cde5ab1972f79b448d63b7c65266abf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 20
+  Speed: 1000
+  rigidbody: {fileID: 0}
 --- !u!205 &20551622
 LODGroup:
   m_ObjectHideFlags: 0
@@ -255,20 +270,6 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
---- !u!114 &5236631591847192025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cde5ab1972f79b448d63b7c65266abf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 20
-  Speed: 1000
 --- !u!114 &7450936738628161942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,3 +282,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88bd1338b3236a49bfc5b5db44a7a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sparkEffect: {fileID: 0}
