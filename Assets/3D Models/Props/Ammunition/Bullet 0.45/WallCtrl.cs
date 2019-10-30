@@ -3,7 +3,7 @@ using System.Collections;
 
 public class WallCtrl : MonoBehaviour
 {
-    /*
+
     public GameObject sparkEffect;
     void OnCollisionEnter(Collision collision)
     {
@@ -25,8 +25,7 @@ public class WallCtrl : MonoBehaviour
                 Destroy(collision.gameObject);
 
             }
-            //
+            */
 
     }
-    */
 }
