@@ -71,6 +71,9 @@ public class pla : NetworkBehaviour
 
         fpsCam.transform.localEulerAngles = new Vector3(cameraRotaionX, 0f, 0f);
 
+        h = Input.GetAxisRaw("Horizontal");
+        v = Input.GetAxisRaw("Vertical");
+
         AnimationUpdate();
 
         Act();
