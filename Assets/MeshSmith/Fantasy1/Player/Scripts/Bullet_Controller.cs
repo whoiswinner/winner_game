@@ -19,6 +19,13 @@ public class Bullet_Controller : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         var hit = collision.gameObject;
+        var health_manager = hit.GetComponent<Health_Manager>();
+
+
+        if(health_manager != null)
+        {
+            health_manager.TakeDamage(10);
+        }
 
         Debug.Log("Remove GameObject Self");
 
