@@ -21,6 +21,7 @@ public class pla : NetworkBehaviour
 
 
     private Camera cam;
+    private AudioListener aud;
 
     float h;
     float v;
@@ -47,6 +48,7 @@ public class pla : NetworkBehaviour
     void Start()
     {
         cam = GetComponentInChildren<Camera>();
+        aud = GetComponentInChildren<AudioListener>();
         isJumping = true;
         netAnimator = GetComponent<NetworkAnimator>();
     }
@@ -61,11 +63,16 @@ public class pla : NetworkBehaviour
         {
             if (cam.enabled)
                 cam.enabled = false;
+            if (aud.enabled)
+                aud.enabled = false;
             return;
         }
 
         if (!cam.enabled)
             cam.enabled = true;
+
+        if (!aud.enabled)
+            aud.enabled = true;
 
 
         float _yRotation = Input.GetAxisRaw("Mouse X");
