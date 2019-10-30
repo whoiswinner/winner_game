@@ -58,14 +58,20 @@ public class pla : NetworkBehaviour
             return;
         }
 
-        h = Input.GetAxisRaw("Horizontal");
-        v = Input.GetAxisRaw("Vertical");
+        var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
+        var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
+
+        transform.Rotate(0, x, 0);
+        transform.Translate(0, 0, z);
+
+        //h = Input.GetAxisRaw("Horizontal");
+        //v = Input.GetAxisRaw("Vertical");
 
         AnimationUpdate();
 
         Act();
         MoveCtrl();
-        RotCtrl();
+        //RotCtrl();
         
     }
 
@@ -100,6 +106,7 @@ public class pla : NetworkBehaviour
 
     }
 
+    /*
     void RotCtrl()
     {
         float _yRotation = Input.GetAxisRaw("Mouse X");
@@ -113,6 +120,7 @@ public class pla : NetworkBehaviour
 
         fpsCam.transform.localEulerAngles = new Vector3(cameraRotaionX, 0f, 0f);
     }
+    */
 
     void Jump()
     {
