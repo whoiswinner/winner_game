@@ -55,17 +55,21 @@ public class pla : NetworkBehaviour
         Debug.Log(isLocalPlayer);
         if (!isLocalPlayer)
         {
+            gameObject.GetComponent<Camera>().enabled = false;
             return;
         }
 
-        var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
-        var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
 
-        transform.Rotate(0, x, 0);
-        transform.Translate(0, 0, z);
+        float _yRotation = Input.GetAxisRaw("Mouse X");
+        Vector3 _characterRotationY = new Vector3(0f, _yRotation, 0f) * rotSpeed;
+        rigidbody.MoveRotation(rigidbody.rotation * Quaternion.Euler(_characterRotationY));
 
-        //h = Input.GetAxisRaw("Horizontal");
-        //v = Input.GetAxisRaw("Vertical");
+        float _xRotation = Input.GetAxisRaw("Mouse Y");
+        float _cameraRotationX = _xRotation * rotSpeed;
+        cameraRotaionX -= _cameraRotationX;
+        cameraRotaionX = Mathf.Clamp(cameraRotaionX, -cameraLimit, cameraLimit);
+
+        fpsCam.transform.localEulerAngles = new Vector3(cameraRotaionX, 0f, 0f);
 
         AnimationUpdate();
 
