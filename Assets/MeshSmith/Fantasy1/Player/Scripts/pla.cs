@@ -207,9 +207,11 @@ public class pla : NetworkBehaviour
 
         var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
 
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward;
+
         NetworkServer.Spawn(bullet);
 
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward;
+        
         
         Destroy(bullet, 20.0f);
     }
@@ -225,6 +227,7 @@ public class pla : NetworkBehaviour
         {
             SoundManager.instance.PlaySE("Gunwall");
             GameObject spark = Instantiate(sparkEffect, collision.transform.position, Quaternion.identity) as GameObject;
+            Debug.Log("You Are HitteD!!!");
             Destroy(collision.gameObject);
         }
     }
