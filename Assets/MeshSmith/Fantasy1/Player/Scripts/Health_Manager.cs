@@ -23,7 +23,7 @@ public class Health_Manager : NetworkBehaviour
 
     }
 
-    void OnChangedHealth( int health)
+    void OnChangeHealth( int health)
     {
         Debug.Log("HEALTH : " + health);
         //healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
