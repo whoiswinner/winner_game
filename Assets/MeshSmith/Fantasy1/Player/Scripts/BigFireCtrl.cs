@@ -5,31 +5,52 @@ public class BigFireCtrl : MonoBehaviour
 {
     public GameObject Bigbullet;
     public Transform firePos;
-
+    public float time;
+    public float stunDeley;
     private PlayerUi PlayerUi;
     private GameObject player;
+    private Animator animator;
+
+    private pla pla;
 
     void Awake()
     {
+
         player = GameObject.FindGameObjectWithTag("Player");
         PlayerUi = player.GetComponent<PlayerUi>();
+        animator = player.GetComponent<Animator>();
+    }
+    void Start()
+    {
+        stunDeley = 1.0f;
     }
     void Update()
     {
-        if (PlayerUi.skillSlider.value == 100 && Input.GetKey(KeyCode.Q))
+        time += Time.deltaTime;
+
+        if (PlayerUi.skillSlider.value == 100 && Input.GetKeyDown(KeyCode.Q))
         {
             Key_Q();
             BigFire();
+            animator.SetBool("Stun", true);
+            pla.moveSpeed = 0.0f;
+
             PlayerUi.currentSkill = 0;
             PlayerUi.skillSlider.value = 0;
+            time = 0f;
+
+            StartCoroutine(Stop());
+
+
         }
 
+        Debug.Log(time);
 
     }
     private void Key_Q()
     {
         Debug.Log("Q");
-        
+
     }
 
     void BigFire()
@@ -38,7 +59,15 @@ public class BigFireCtrl : MonoBehaviour
         SoundManager.instance.PlaySE("GunSound11");
 
     }
+    IEnumerator Stop()
+    {
 
+        yield return new WaitForSeconds(2.0f);
+        animator.SetBool("Stun", false);
+        pla.moveSpeed = 5.0f;
+
+
+    }
     void CreateBigBullet()
     {
         Instantiate(Bigbullet, firePos.transform.position, firePos.transform.rotation);
@@ -46,18 +75,5 @@ public class BigFireCtrl : MonoBehaviour
     }
 
 
-    /* void CreateBullet()
-     {
-         GameObject player = GameObject.FindWithTag("Player");
-         // player.transform.eulerAngles.x
-         Quaternion delta_rotated = player.transform.rotation.eulerAngles;
-         delta_rotated.eulerAngles
-         Vector3 delta_pos = player.transform.position;
-
-         //delta_rotated.x = 90;
-         Debug.Log("Changed Rot :" + delta_rotated.eulerAngles);
-         Instantiate(bullet, delta_pos, delta_rotated);
-     }
-
-     */
+    
 }

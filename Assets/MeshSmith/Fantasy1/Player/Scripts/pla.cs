@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class pla : MonoBehaviour
 {
-    public float moveSpeed = 5.0f;
+    public static float moveSpeed = 5.0f;
     public float rotSpeed = 3.0f;
     public float jumpPower = 3.0f;
     public Camera fpsCam;
@@ -17,7 +17,7 @@ public class pla : MonoBehaviour
     bool isJumping;
 
     Rigidbody rigidbody;
-
+    public GameObject sparkEffect;
     Animator animator;
     
     void Awake()
@@ -147,6 +147,12 @@ public class pla : MonoBehaviour
         if (collision.gameObject.CompareTag("ground"))
         {
             isJumping = true;
+        }
+        if (collision.gameObject.tag == "Bullet")
+        {
+            SoundManager.instance.PlaySE("Gunwall");
+            GameObject spark = Instantiate(sparkEffect, collision.transform.position, Quaternion.identity) as GameObject;
+            Destroy(collision.gameObject);
         }
     }
 

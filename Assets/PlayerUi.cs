@@ -24,31 +24,31 @@ public class PlayerUi : MonoBehaviour
     private pla pla;
 
     private bool isDead;
-    public bool hi;
+
     private bool damaged;
 
 
-   void Awake()
+    void Awake()
     {
         anim = GetComponent<Animator>();
-        pla = GetComponent <pla>();
+        pla = GetComponent<pla>();
 
         currentHealth = startHealth;
         currentShield = startShield;
         currentSkill = startSkill;
     }
 
-   
+
 
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("Skill", 0, 1);
         InvokeRepeating("Shield", 0, 1);
-        hi = false;
-       
-        
-        
+        damaged = false;
+
+
+
     }
 
     // Update is called once per frame
@@ -57,7 +57,7 @@ public class PlayerUi : MonoBehaviour
         damaged = false;
         anim.SetBool("damaged", false);
 
-        
+
     }
     public void TakeDamage(int amount)
     {
@@ -66,15 +66,15 @@ public class PlayerUi : MonoBehaviour
         currentHealth -= amount;
         healtSlider.value = currentHealth;
 
-        if(currentHealth <= 0 && !isDead)
+        if (currentHealth <= 0 && !isDead)
         {
             Death();
         }
     }
     void Damaged()
     {
-        
-        
+
+
 
     }
 
@@ -83,10 +83,10 @@ public class PlayerUi : MonoBehaviour
         if (currentSkill <= 100)
         {
             currentSkill += 10;
-           skillSlider.value = currentSkill;
+            skillSlider.value = currentSkill;
 
         }
-        
+
     }
 
     void Shield()
@@ -94,7 +94,7 @@ public class PlayerUi : MonoBehaviour
         if (currentShield <= 100)
         {
             currentShield += 10;
-           shieldSlider.value = currentShield;
+            shieldSlider.value = currentShield;
 
         }
     }
