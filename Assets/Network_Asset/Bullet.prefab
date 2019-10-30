@@ -205,12 +205,12 @@ GameObject:
   - component: {fileID: 3110035630082849491}
   - component: {fileID: 8121772092575661130}
   - component: {fileID: 3110035630065365489}
-  - component: {fileID: 5498362505257678753}
   - component: {fileID: 3110035630734667833}
   - component: {fileID: 3110035630734667830}
   - component: {fileID: 3110035630734667834}
   - component: {fileID: 3110035630734667832}
   - component: {fileID: 3110035630734667835}
+  - component: {fileID: 114976629786125498}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Bullet
@@ -275,19 +275,6 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
---- !u!114 &5498362505257678753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3110035630082616333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b88bd1338b3236a49bfc5b5db44a7a65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sparkEffect: {fileID: 0}
 --- !u!54 &3110035630734667833
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -468,3 +455,15 @@ MonoBehaviour:
     i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114976629786125498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3110035630082616333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89354f7bbde6dc44b80c48d4929fc444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
