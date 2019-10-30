@@ -198,7 +198,7 @@ public class pla : NetworkBehaviour
         }
     }
 
-
+    [Command]
     void CmdFire()
     {
         Debug.Log("FIRE!");
@@ -207,8 +207,10 @@ public class pla : NetworkBehaviour
 
         var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
 
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward;
         NetworkServer.Spawn(bullet);
+
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward;
+        
         Destroy(bullet, 20.0f);
     }
 
