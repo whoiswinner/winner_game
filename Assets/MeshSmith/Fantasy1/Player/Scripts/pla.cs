@@ -17,6 +17,8 @@ public class pla : NetworkBehaviour
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
 
+    private NetworkAnimator netAnimator;
+
 
     private Camera cam;
 
@@ -46,6 +48,7 @@ public class pla : NetworkBehaviour
     {
         cam = GetComponentInChildren<Camera>();
         isJumping = true;
+        netAnimator = GetComponent<NetworkAnimator>();
     }
 
     
@@ -152,11 +155,11 @@ public class pla : NetworkBehaviour
                 Debug.Log("점프불가능");
                 return;
             }
-            animator.SetBool("Jumping", true);
+            netAnimator.animator.SetBool("Jumping", true);
         }
         else
         {
-            animator.SetBool("Jumping", false);
+            netAnimator.animator.SetBool("Jumping", false);
         }
 
     }
@@ -165,12 +168,12 @@ public class pla : NetworkBehaviour
     {
         if (h == 0 && v == 0)
         {
-            animator.SetBool("isRunning", false);
+            netAnimator.animator.SetBool("isRunning", false);
         
         }
         else
         {
-            animator.SetBool("isRunning", true);
+            netAnimator.animator.SetBool("isRunning", true);
         
         }
 
@@ -181,11 +184,11 @@ public class pla : NetworkBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             CmdFire();
-            animator.SetBool("acttack", true);
+            netAnimator.animator.SetBool("acttack", true);
         }
         else
         {
-            animator.SetBool("acttack", false);
+            netAnimator.animator.SetBool("acttack", false);
         }
     }
 
