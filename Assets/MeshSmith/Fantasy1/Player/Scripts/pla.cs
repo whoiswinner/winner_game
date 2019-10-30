@@ -233,7 +233,7 @@ public class pla : NetworkBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             SoundManager.instance.PlaySE("Gunwall");
-            GameObject spark = Instantiate(sparkEffect, collision.transform.position, Quaternion.identity) as GameObject;
+            //GameObject spark = Instantiate(sparkEffect, collision.transform.position, Quaternion.identity) as GameObject;
             Debug.Log("You Are HitteD!!!");
             Destroy(collision.gameObject);
         }

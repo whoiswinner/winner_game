@@ -74,7 +74,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 5594802557712337007}
   m_FillRect: {fileID: 5594802559191144072}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
@@ -95,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5594802557356513037}
   m_Layer: 5
-  m_Name: Fill Area
+  m_Name: hpFill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -559,7 +559,7 @@ GameObject:
   - component: {fileID: 5594802558588063190}
   - component: {fileID: 5594802558588063185}
   m_Layer: 5
-  m_Name: Fill
+  m_Name: hpFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -631,7 +631,7 @@ GameObject:
   - component: {fileID: 5594802558605167598}
   - component: {fileID: 5594802558605167593}
   m_Layer: 5
-  m_Name: Background
+  m_Name: hpBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -765,7 +765,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 5594802558588063185}
   m_FillRect: {fileID: 5594802558588063184}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
@@ -958,7 +958,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 5594802557676412802}
   m_FillRect: {fileID: 5594802557425882653}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
