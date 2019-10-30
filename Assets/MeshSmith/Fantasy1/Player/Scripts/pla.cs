@@ -213,7 +213,7 @@ public class pla : NetworkBehaviour
 
         
         
-        Destroy(bullet, 20.0f);
+        Destroy(bullet, 10.0f);
     }
 
 
