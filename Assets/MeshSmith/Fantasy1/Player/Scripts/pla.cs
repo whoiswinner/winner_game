@@ -1,15 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class pla : MonoBehaviour
+public class pla : NetworkBehaviour
 {
+    
     public static float moveSpeed = 5.0f;
     public float rotSpeed = 3.0f;
     public float jumpPower = 3.0f;
     public Camera fpsCam;
     public float cameraLimit;
     public float cameraRotaionX = 0;
+
+
+    public GameObject bulletPrefab;
+    public Transform bulletSpawn;
+
+
+
 
     float h;
     float v;
@@ -19,7 +28,15 @@ public class pla : MonoBehaviour
     Rigidbody rigidbody;
     public GameObject sparkEffect;
     Animator animator;
-    
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+        gameObject.tag = "Player";
+        Debug.LogError("IM LOCAL PLAYER!");
+    }
+
+
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -30,9 +47,17 @@ public class pla : MonoBehaviour
         isJumping = true;
     }
 
+    
+
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(isLocalPlayer);
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
 
@@ -43,6 +68,8 @@ public class pla : MonoBehaviour
         RotCtrl();
         
     }
+
+
     void FixedUpdate()
     {
         Jump();
@@ -128,17 +155,29 @@ public class pla : MonoBehaviour
         }
 
     }
-
+    
     void Act()
     {
         if (Input.GetMouseButtonDown(0))
-        { 
+        {
+            CmdFire();
             animator.SetBool("acttack", true);
         }
         else
         {
             animator.SetBool("acttack", false);
         }
+    }
+
+
+    void CmdFire()
+    {
+        Debug.Log("FIRE!");
+        var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
+        NetworkServer.Spawn(bullet);
+        Destroy(bullet, 3.0f);
     }
 
 

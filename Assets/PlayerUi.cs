@@ -64,7 +64,7 @@ public class PlayerUi : MonoBehaviour
         damaged = true;
         anim.SetBool("damaged", true);
         currentHealth -= amount;
-        healtSlider.value = currentHealth;
+        //healtSlider.value = currentHealth;
 
         if (currentHealth <= 0 && !isDead)
         {
@@ -83,7 +83,7 @@ public class PlayerUi : MonoBehaviour
         if (currentSkill <= 100)
         {
             currentSkill += 10;
-            skillSlider.value = currentSkill;
+            //skillSlider.value = currentSkill;
 
         }
 
@@ -94,7 +94,7 @@ public class PlayerUi : MonoBehaviour
         if (currentShield <= 100)
         {
             currentShield += 10;
-            shieldSlider.value = currentShield;
+            //shieldSlider.value = currentShield;
 
         }
     }
