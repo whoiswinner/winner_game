@@ -173,11 +173,14 @@ public class pla : NetworkBehaviour
     void CmdFire()
     {
         Debug.Log("FIRE!");
+
+        SoundManager.instance.PlaySE("GunSound");
+
         var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
 
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward;
         NetworkServer.Spawn(bullet);
-        Destroy(bullet, 3.0f);
+        Destroy(bullet, 20.0f);
     }
 
 
