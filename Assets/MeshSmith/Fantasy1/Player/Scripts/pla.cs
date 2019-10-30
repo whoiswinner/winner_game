@@ -93,6 +93,12 @@ public class pla : NetworkBehaviour
 
     void FixedUpdate()
     {
+        
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+        Debug.Log("Fixed Upate");
         Jump();
     }
 
