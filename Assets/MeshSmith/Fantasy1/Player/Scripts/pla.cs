@@ -56,7 +56,7 @@ public class pla : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(isLocalPlayer);
+        //Debug.Log(isLocalPlayer);
         if (!isLocalPlayer)
         {
             if (cam.enabled)
@@ -98,7 +98,7 @@ public class pla : NetworkBehaviour
         {
             return;
         }
-        Debug.Log("Fixed Upate");
+        //Debug.Log("Fixed Upate");
         Jump();
     }
 
