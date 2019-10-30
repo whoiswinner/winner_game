@@ -18,7 +18,7 @@ public class pla : NetworkBehaviour
     public Transform bulletSpawn;
 
 
-
+    private Camera cam;
 
     float h;
     float v;
@@ -44,6 +44,7 @@ public class pla : NetworkBehaviour
     }
     void Start()
     {
+        cam = GetComponentInChildren<Camera>();
         isJumping = true;
     }
 
@@ -55,9 +56,13 @@ public class pla : NetworkBehaviour
         Debug.Log(isLocalPlayer);
         if (!isLocalPlayer)
         {
-            gameObject.GetComponent<Camera>().enabled = false;
+            if (cam.enabled)
+                cam.enabled = false;
             return;
         }
+
+        if (!cam.enabled)
+            cam.enabled = true;
 
 
         float _yRotation = Input.GetAxisRaw("Mouse X");
