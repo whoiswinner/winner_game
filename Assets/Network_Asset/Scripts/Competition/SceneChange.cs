@@ -19,30 +19,11 @@ public class SceneChange : NetworkBehaviour
     private PlayerUi PlayerUi;
     private GameObject player;
 
-    [SyncVar] bool Competition;
+    [SyncVar(hook ="OnCompetitionChanged")] bool Competition;
 
-
-    [ClientRpc]
-    void RpcSyncVarWithClients(bool varToSync)
+    void OnCompetitionChanged(bool value)
     {
-        Competition = varToSync;
-    }
-
-    [Command]
-    void CmdComPetition(bool OnOff)
-    {
-        Debug.Log("CmdCompetition " + OnOff);
-        RpcChangeCompetition(OnOff);
-    }
-
-    [ClientRpc]
-    void RpcChangeCompetition(bool OnOff)
-    {
-        
-        Debug.Log("RPC Change Competition" + OnOff);
-        Competition = OnOff;
-
-        if (OnOff == true)
+        if (value == true)
         {
 
             SceneManager.LoadScene("Soundsc", LoadSceneMode.Additive);
@@ -73,12 +54,36 @@ public class SceneChange : NetworkBehaviour
             }
             else if (checkShield)
             {
-                
+
                 ShieldOn = false;
                 checkShield = false;
 
             }
         }
+    }
+
+
+    [ClientRpc]
+    void RpcSyncVarWithClients(bool varToSync)
+    {
+        Competition = varToSync;
+    }
+
+    [Command]
+    void CmdComPetition(bool OnOff)
+    {
+        Debug.Log("CmdCompetition " + OnOff);
+        RpcChangeCompetition(OnOff);
+    }
+
+    [ClientRpc]
+    void RpcChangeCompetition(bool OnOff)
+    {
+        
+        Debug.Log("RPC Change Competition" + OnOff);
+        Competition = OnOff;
+
+        
 
 
 
