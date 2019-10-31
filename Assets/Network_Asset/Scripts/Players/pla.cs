@@ -47,10 +47,14 @@ public class pla : NetworkBehaviour
 
     private Canvas player_canvas;
 
+    
+
+
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
         gameObject.tag = "Player";
+        gameObject.name = "Local_Player";
         Debug.LogError("IM LOCAL PLAYER!");
     }
 
@@ -75,7 +79,6 @@ public class pla : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         //Debug.Log(isLocalPlayer);
         if (!isLocalPlayer)
         {
@@ -96,6 +99,10 @@ public class pla : NetworkBehaviour
 
         if (!player_canvas.enabled)
             player_canvas.enabled = true;
+
+
+
+        
 
 
         fireTime += Time.deltaTime;
@@ -180,7 +187,6 @@ public class pla : NetworkBehaviour
         
         if (Input.GetButtonDown("Jump"))
         {
-            
             if (isJumping)
             {
                 Debug.Log("점프가능");
@@ -216,9 +222,15 @@ public class pla : NetworkBehaviour
         }
 
     }
-    
-    void Act()
+
+    public void Act(int action = 0)
     {
+        if(action != 0)
+        {
+            Debug.LogError("ACTION FOUND!!!!!!!!!!!!!!!! :: " + action);
+        }
+
+
         if (Input.GetMouseButtonDown(0))
         {
             if (fireTime >= fireDeley)
@@ -230,20 +242,20 @@ public class pla : NetworkBehaviour
 
         }
 
-        else if (PlayerUi.skillSlider.value >= 100 && Input.GetKeyDown(KeyCode.Q)) {
+        else if (PlayerUi.skillSlider.value >= 100 && (Input.GetKeyDown(KeyCode.Q) || action == 1)) {
             CmdBigFire();
             netAnimator.animator.SetBool("acttack", true);
             PlayerUi.currentSkill -= 100;
             PlayerUi.skillSlider.value -= 100;
         }
-        else if (PlayerUi.skillSlider.value >= 20 && Input.GetKeyDown(KeyCode.R))
+        else if (PlayerUi.skillSlider.value >= 20 && (Input.GetKeyDown(KeyCode.R) || action == 3))
         {
             CmdFastFire();
             netAnimator.animator.SetBool("acttack", true);
             PlayerUi.currentSkill -= 20;
             PlayerUi.skillSlider.value -= 20;
         }
-        else if (PlayerUi.shieldSlider.value == 100 && Input.GetKey(KeyCode.E))
+        else if (PlayerUi.shieldSlider.value == 100 && (Input.GetKeyDown(KeyCode.Q) || action == 2))
         {
             CmdShield();
             PlayerUi.currentShield = 0;

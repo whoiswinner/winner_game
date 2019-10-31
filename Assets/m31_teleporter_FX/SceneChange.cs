@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 
-public class SceneChange : MonoBehaviour
+public class SceneChange : NetworkBehaviour
 {
     public static bool checkSkill;
     public static bool checkShield;
@@ -17,6 +18,71 @@ public class SceneChange : MonoBehaviour
 
     private PlayerUi PlayerUi;
     private GameObject player;
+
+    [SyncVar] bool Competition;
+
+
+    [ClientRpc]
+    void RpcSyncVarWithClients(bool varToSync)
+    {
+        Competition = varToSync;
+    }
+
+    [Command]
+    void CmdComPetition(bool OnOff)
+    {
+        Debug.Log("CmdCompetition " + OnOff);
+        RpcChangeCompetition(OnOff);
+    }
+
+    [ClientRpc]
+    void RpcChangeCompetition(bool OnOff)
+    {
+        
+        Debug.Log("RPC Change Competition" + OnOff);
+        Competition = OnOff;
+
+        if (OnOff == true)
+        {
+
+            SceneManager.LoadScene("Soundsc", LoadSceneMode.Additive);
+            if (IsPause == false)
+            {
+                Time.timeScale = 0;
+                IsPause = true;
+                return;
+            }
+            Debug.Log(checkSkill);
+        }
+        else
+        {
+
+            if (checkSkill)
+            {
+                // Time.timeScale = 1;
+
+                ShieldOn = false;
+                if (PlayerUi.currentHealth > 0)
+                {
+                    PlayerUi.TakeDamage((int)deal);
+                    Debug.Log(checkSkill);
+                    checkSkill = false;
+
+
+                }
+            }
+            else if (checkShield)
+            {
+                
+                ShieldOn = false;
+                checkShield = false;
+
+            }
+        }
+
+
+
+    }
 
 
     void Awake()
@@ -40,44 +106,23 @@ public class SceneChange : MonoBehaviour
 
         if (ShieldOn && BigBullet.gameObject.tag == "BigBullet")
         {
-
-            SceneManager.LoadScene("Soundsc", LoadSceneMode.Additive);
-            if (IsPause == false)
-            {
-                Time.timeScale = 0;
-                IsPause = true;
-                return;
-            }
-            Debug.Log(checkSkill);
-
+            Competition = true;
+            CmdComPetition(Competition);
+            Debug.Log("Competition : " + Competition);
         }
 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (checkSkill)
+        if(other.tag == "BigBullet")
         {
-            // Time.timeScale = 1;
-
-            ShieldOn = false;
-            if (PlayerUi.currentHealth > 0)
-            {
-                PlayerUi.TakeDamage((int)deal);
-                Destroy(other.gameObject);
-                Debug.Log(checkSkill);
-                checkSkill = false;
-
-
-            }
-        }
-        else if (checkShield)
-        {
+            Competition = false;
+            CmdComPetition(Competition);
+            Debug.Log("Competition : " + Competition);
             Destroy(other.gameObject);
-            ShieldOn = false;
-            checkShield = false;
-
         }
+        
     }
 
     void stop()
