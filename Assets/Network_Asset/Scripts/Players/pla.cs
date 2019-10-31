@@ -255,7 +255,7 @@ public class pla : NetworkBehaviour
             PlayerUi.currentSkill -= 20;
             PlayerUi.skillSlider.value -= 20;
         }
-        else if (PlayerUi.shieldSlider.value == 100 && (Input.GetKeyDown(KeyCode.Q) || action == 2))
+        else if (PlayerUi.shieldSlider.value == 100 && (Input.GetKeyDown(KeyCode.E) || action == 2))
         {
             CmdShield();
             PlayerUi.currentShield = 0;

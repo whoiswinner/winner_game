@@ -25,7 +25,7 @@ public class BigBulletcontrol : MonoBehaviour
 
     void BigbulletShot()
     {
-        rigidbody.AddForce(transform.up * Speed);
+        //rigidbody.AddForce(transform.up * Speed);
     }
 
 
