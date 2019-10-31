@@ -317,7 +317,7 @@ public class pla : NetworkBehaviour
         for (int i = 0; i < 3; i++)
         {
             Debug.Log("Fast Fire Shoot");
-            var fastBullet = (GameObject)Instantiate(fastBulletPrefab, bigBulletSpawn.position, bigBulletSpawn.rotation);
+            var fastBullet = (GameObject)Instantiate(fastBulletPrefab, fastBulletSpawn.position, fastBulletSpawn.rotation);
 
             NetworkServer.Spawn(fastBullet);
 
