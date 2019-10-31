@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2169317276807015164}
   - component: {fileID: 2169317276787728862}
-  - component: {fileID: 8754432446988265358}
   - component: {fileID: 2169317275578667302}
   - component: {fileID: 2169317275578667297}
   - component: {fileID: 2169317275578667296}
@@ -66,19 +65,6 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
---- !u!114 &8754432446988265358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2169317276807314466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b88bd1338b3236a49bfc5b5db44a7a65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sparkEffect: {fileID: 0}
 --- !u!54 &2169317275578667302
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -94,7 +80,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &2169317275578667297
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -137,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
-  m_SendInterval: 0.1
+  m_SendInterval: 0
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
@@ -178,7 +164,7 @@ MonoBehaviour:
     i14: 0
     i15: 0
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1
 --- !u!1 &2169317276807321454
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,10 +366,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2169317276807015164}
     m_Modifications:
-    - target: {fileID: 1000012118400646, guid: 3123da49cb81147489b444f2749aba47, type: 3}
-      propertyPath: m_Name
-      value: FlameThrowerEffect
-      objectReference: {fileID: 0}
     - target: {fileID: 4000013285487154, guid: 3123da49cb81147489b444f2749aba47, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0001896286
@@ -439,6 +421,10 @@ PrefabInstance:
     - target: {fileID: 4000013285487154, guid: 3123da49cb81147489b444f2749aba47, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.001666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012118400646, guid: 3123da49cb81147489b444f2749aba47, type: 3}
+      propertyPath: m_Name
+      value: FlameThrowerEffect
       objectReference: {fileID: 0}
     - target: {fileID: 4000010171797510, guid: 3123da49cb81147489b444f2749aba47, type: 3}
       propertyPath: m_LocalPosition.z

@@ -204,7 +204,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6904364764868997137}
   - component: {fileID: 6904364764848372531}
-  - component: {fileID: 4086506834531056995}
   - component: {fileID: 6904364764680314321}
   - component: {fileID: 6904364764680314320}
   - component: {fileID: 6904364764680314322}
@@ -259,19 +258,6 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
---- !u!114 &4086506834531056995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6904364764868765391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b88bd1338b3236a49bfc5b5db44a7a65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sparkEffect: {fileID: 0}
 --- !u!54 &6904364764680314321
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -330,7 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
-  m_SendInterval: 0.1
+  m_SendInterval: 0
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
@@ -371,4 +357,4 @@ MonoBehaviour:
     i14: 0
     i15: 0
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1

@@ -7,7 +7,8 @@ public class GameStart : MonoBehaviour
 { 
     public void ChangeFirstScene()
     {
-        SceneManager.LoadScene("StartUI");
+        //SceneManager.LoadScene("StartUI");
+        SceneManager.LoadScene("DemoScene");
     }
     // Start is called before the first frame update
     void Start()
