@@ -165,6 +165,14 @@ public class Local_Listener : MonoBehaviour
             Local_Player_Controller.Act(3);
 
         }
+
+        else if (data.Contains("volume"))
+        {
+            string replaced = data.Replace("volume:", "");
+            int result = Int32.Parse(replaced);
+            Local_Player_Controller.Receive_Decibel(result);
+
+        }
         //if (data.Contains(""))
     }
 }

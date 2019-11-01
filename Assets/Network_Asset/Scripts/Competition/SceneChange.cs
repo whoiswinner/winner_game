@@ -19,6 +19,9 @@ public class SceneChange : NetworkBehaviour
     private PlayerUi PlayerUi;
     private GameObject player;
 
+    private Canvas player_canvas;
+    private Canvas player_competition_canvas;
+
     [SyncVar(hook ="OnCompetitionChanged")] bool Competition;
 
     void OnCompetitionChanged(bool value)
@@ -26,14 +29,14 @@ public class SceneChange : NetworkBehaviour
         if (value == true)
         {
 
-            SceneManager.LoadScene("Soundsc", LoadSceneMode.Additive);
-            if (IsPause == false)
+            player_competition_canvas.enabled = true;
+            /* if (IsPause == false)
             {
                 Time.timeScale = 0;
                 IsPause = true;
                 return;
             }
-            Debug.Log(checkSkill);
+            */
         }
         else
         {
@@ -83,22 +86,46 @@ public class SceneChange : NetworkBehaviour
         Debug.Log("RPC Change Competition" + OnOff);
         Competition = OnOff;
 
-        
-
-
-
     }
 
 
     void Awake()
     {
-
-        player = GameObject.FindGameObjectWithTag("Player");
-        PlayerUi = player.GetComponent<PlayerUi>();
+        
     }
+
+
+    public override void OnStartClient()
+    {
+        Debug.Log("OnStartClient Called!");
+        player = GameObject.Find("Local_Player");
+        if (player == null)
+        {
+            Debug.LogError("Local Player Not Detected!");
+        }
+        PlayerUi = player.GetComponent<PlayerUi>();
+        if (PlayerUi == null)
+        {
+            Debug.LogError("Local Player Not Detected!");
+        }
+        foreach (Canvas cv in GetComponentsInChildren<Canvas>())
+        {
+            if (cv.gameObject != gameObject && cv.gameObject.name == "Canvas")
+            {
+                Debug.Log("I FOUND CANVAS!");
+                player_canvas = cv;
+            }
+
+            if (cv.gameObject != gameObject && cv.gameObject.name == "Canvas_Competition")
+            {
+                Debug.Log("I FOUND Competition CANVAS!");
+                player_competition_canvas = cv;
+            }
+        }
+    }
+
     void Start()
     {
-
         deal = 50.0f;
     }
     void Update()
@@ -108,7 +135,6 @@ public class SceneChange : NetworkBehaviour
 
     void OnTriggerEnter(Collider BigBullet)
     {
-
         if (ShieldOn && BigBullet.gameObject.tag == "BigBullet")
         {
             Competition = true;
@@ -118,17 +144,6 @@ public class SceneChange : NetworkBehaviour
 
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.tag == "BigBullet")
-        {
-            Competition = false;
-            CmdComPetition(Competition);
-            Debug.Log("Competition : " + Competition);
-            Destroy(other.gameObject);
-        }
-        
-    }
 
     void stop()
     {

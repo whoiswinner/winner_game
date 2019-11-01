@@ -45,9 +45,103 @@ public class pla : NetworkBehaviour
     public GameObject sparkEffect;
     Animator animator;
 
-    private Canvas player_canvas;
 
-    
+    //Shield
+
+    private Canvas player_canvas;
+    private Canvas player_competition_canvas;
+
+    public int Decibel;
+
+    private Health_Manager hm;
+
+
+    public Transform firePos;
+
+    bool ShieldOn;
+
+
+    [SyncVar(hook = "OnCompetitionChanged")] bool Competition;
+
+    void OnCompetitionChanged(bool value)
+    {
+        if (Competition)
+        {
+            player_competition_canvas.GetComponentInChildren<BScore>().Init();
+            player_competition_canvas.GetComponentInChildren<FScore>().Init();
+            player_competition_canvas.enabled = true;
+        }
+        else
+        {
+            player_competition_canvas.enabled = false;
+        }
+    }
+
+    public void Receive_Decibel(int db)
+    {
+        Decibel = db;
+    }
+
+    [ClientRpc]
+    void RpcSyncDBWithClients(int value)
+    {
+        Decibel = value;
+    }
+
+    [Command]
+    void CmdDB(int value)
+    {
+        Debug.Log("CmdDB " + value);
+        RpcChangeDB(value);
+    }
+
+    [ClientRpc]
+    void RpcChangeDB(int value)
+    {
+
+        Debug.Log("RPC Change RpcChangeDB" + value);
+        Decibel = value;
+    }
+
+
+
+    [ClientRpc]
+    void RpcSyncVarWithClients(bool varToSync)
+    {
+        Competition = varToSync;
+    }
+
+    [Command]
+    void CmdComPetition(bool OnOff)
+    {
+        Debug.Log("CmdCompetition " + OnOff);
+        RpcChangeCompetition(OnOff);
+    }
+
+    [ClientRpc]
+    void RpcChangeCompetition(bool OnOff)
+    {
+
+        Debug.Log("RPC Change Competition" + OnOff);
+        Competition = OnOff;
+    }
+
+    public void Finish_Competition(int winner)
+    {
+        if(winner == 0)
+        {
+            hm.AddHealth(10);
+            
+        }
+        else
+        {
+            hm.TakeDamage(50);
+        }
+        Competition = false;
+        CmdComPetition(Competition);
+    }
+
+
 
 
     public override void OnStartLocalPlayer()
@@ -68,8 +162,22 @@ public class pla : NetworkBehaviour
     {
         cam = GetComponentInChildren<Camera>();
         aud = GetComponentInChildren<AudioListener>();
-        player_canvas = GetComponentInChildren<Canvas>();
-        isJumping = true;
+        hm = GetComponentInChildren<Health_Manager>();
+        
+        foreach (Canvas cv in gameObject.GetComponentsInChildren<Canvas>())
+        {
+            print("cv Found! " + cv.gameObject.name);
+            if (cv.gameObject != gameObject && cv.gameObject.name == "Canvas")
+            {
+                player_canvas = cv;
+            }
+
+            if (cv.gameObject != gameObject && cv.gameObject.name == "Canvas_Competition")
+            {
+                player_competition_canvas = cv;
+                player_competition_canvas.enabled = false;
+            }
+        }
         netAnimator = GetComponent<NetworkAnimator>();
         PlayerUi = GetComponent<PlayerUi>();
     }
@@ -123,8 +231,12 @@ public class pla : NetworkBehaviour
 
         AnimationUpdate();
 
-        Act();
-        MoveCtrl();
+        if (!Competition)
+        {
+            Act();
+            MoveCtrl();
+        }
+        
         //RotCtrl();
         
     }
@@ -346,7 +458,7 @@ public class pla : NetworkBehaviour
         particles.Play();
         Instantiate(shield, gameObject.transform.position, gameObject.transform.rotation);
         SoundManager.instance.PlaySE("Shield");
-        SceneChange.ShieldOn = true;
+        ShieldOn = true;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -361,6 +473,18 @@ public class pla : NetworkBehaviour
             //GameObject spark = Instantiate(sparkEffect, collision.transform.position, Quaternion.identity) as GameObject;
             Debug.Log("You Are HitteD!!!");
             Destroy(collision.gameObject);
+        }
+
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "BigBullet" && ShieldOn)
+        {
+            Debug.Log("Open Competition Now!");
+            Competition = true;
+            CmdComPetition(Competition);
         }
     }
 

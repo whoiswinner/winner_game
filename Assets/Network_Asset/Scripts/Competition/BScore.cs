@@ -12,6 +12,7 @@ public class BScore : MonoBehaviour
     public int Bscore;
     Text t;
 
+    private pla controller;
 
 
 
@@ -19,38 +20,37 @@ public class BScore : MonoBehaviour
     void Start()
     {
         t = GetComponent<Text>();
+        controller = GetComponentInParent<Canvas>().GetComponentInParent<pla>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        Bscore = controller.Decibel;
         textScore();
+    }
+
+    public void Init()
+    {
+        Bscore = 0;
     }
 
 
     void textScore()
     {
+        t.text = "B의 Score" + Bscore;
+
         if (Input.GetKeyDown(KeyCode.B))
         {
             Bscore += 1;
             t.text = "B의 Score" + Bscore;
 
-
-
         }
-        if (Bscore == 50)
+        if (Bscore >= 80)
         {
-
-            SceneChange.checkShield = true;
-
-            if (SceneChange.checkShield)
-            {
-
-                SceneManager.UnloadScene("Soundsc");
-            }
-
-
+            
+            controller.Finish_Competition(0);
         }
 
 
